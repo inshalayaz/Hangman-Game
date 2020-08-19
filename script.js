@@ -10,7 +10,7 @@ const figureParts = document.querySelectorAll('.figure-part');
 
 const word = ['pokemon','programming','pikachu','virus','noob']
 
-const selectedWord = word[Math.floor(Math.random() * word.length )]
+let selectedWord = word[Math.floor(Math.random() * word.length )]
 
 const correctLetters = []
 const wrongLetters = []
@@ -36,9 +36,31 @@ function displayWord(){
     }
 
 // Update Wrong Letters
-// function updateWrongLetterEl(){
+function updateWrongLettersEl(){
 
-// }
+    //Display Wrong Letters
+    wrongLettersEl.innerHTML = `
+        ${wrongLetters.length > 0 ? '<p>Wrong Letters</p>' : ''}
+        ${wrongLetters.map((letter)=> `<span>${letter}</span>` ) }
+
+    `
+
+    //Display Hangman
+    figureParts.forEach((part,index)=>{
+        const errors = wrongLetters.length
+        if(index < errors){
+            part.style.display = 'block'
+        }else {
+            part.style.display = 'none'
+        }
+    })
+
+    //Check if Lost
+    if(figureParts.length === wrongLetters.length){
+        finalMessage.innerText = 'You Lost :('
+        popup.style.display = 'flex'
+    }
+}
 // Show Notification
 function showNotification(){
     notification.classList.add('show')
@@ -68,6 +90,21 @@ window.addEventListener('keydown',e =>{
             }
         }
     }
+})
+
+
+//  Restart / Play Again Button
+
+playAgainBtn.addEventListener('click',()=>{
+    //Empty Arrays
+    correctLetters.splice(0)
+    wrongLetters.splice(0)
+
+    selectedWord = word[Math.floor(Math.random()*word.length)]
+    displayWord()
+
+    updateWrongLettersEl()
+    popup.style.display = 'none'
 })
 
 displayWord()
