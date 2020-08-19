@@ -9,3 +9,24 @@ const finalMessageRevealWord = document.getElementById('final-message-reveal-wor
 const figureParts = document.querySelectorAll('.figure-part');
 
 const word = ['pokemon','programming','pikachu','virus','noob']
+
+const selectWord = word[Math.floor(Math.random() * word.length )]
+
+const correctLetters = []
+const wrongLetters = []
+
+function displayWord(){
+    wordEl.innerHTML = `
+        ${selectWord
+            .split('')
+            .map(letter =>`
+                <span class="letter">
+                    ${correctLetters.includes(letter) ? letter : ''}
+                </span>
+                `
+            ).join('')
+        }
+    `
+}
+
+displayWord()
