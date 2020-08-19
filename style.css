@@ -96,17 +96,19 @@ h1{
 .popup button:focus{
     outline: 0;
 }
-.notification-container{
-    background-color: rgba(0,0,0,0.3);
+.notification-container {
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px 10px 0 0;
     padding: 15px 20px;
     position: absolute;
     bottom: -50px;
-    transition: all 0.3 ease-in-out;
-}
-.notification-container p{
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .notification-container p {
     margin: 0;
-}
-.notification-container.show{
+  }
+  
+  .notification-container.show {
     transform: translateY(-50px);
-}
+  }
